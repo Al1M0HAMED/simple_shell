@@ -27,7 +27,7 @@ To compile and run the simple shell program, follow these steps:
 4. Run the compiled program: `./hsh`
 
 ## testing
-
+```shell
 $ echo "/bin/ls" | ./hsh
 hsh main.c shell.c test_ls_2
 $
