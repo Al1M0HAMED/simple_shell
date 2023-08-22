@@ -8,7 +8,10 @@ void sigint_handler(int _signal)
 {
 	if (_signal == SIGINT)
 	{
-		write(STDOUT_FILENO, "\nali@lostStars:~$ ", 18);
-		fflush(STDIN_FILENO);
+		if (isatty(STDOUT_FILENO))
+		{
+			write(STDOUT_FILENO, "\n:) ", 4);
+			fflush(STDIN_FILENO);
+		}
 	}
 }

@@ -25,7 +25,10 @@ int main(__attribute__((unused)) int argc, char *argv[])
 	signal(SIGINT, sigint_handler);
 	for (b = 1; continue_loop; continue_loop++)
 	{
-		prompt(0);
+		if (!child_exit_status)
+			prompt(0);
+		else
+			prompt(6);
 		bytes_read = getline(&buffer, &buffer_size, stdin);
 		if (bytes_read == EOF)
 		{
@@ -44,6 +47,7 @@ int main(__attribute__((unused)) int argc, char *argv[])
 				break;
 			}
 			b = built(command[0], buffer, &child_exit_status, &continue_loop);
+			child_exit_status = b;
 			command[c] = NULL;
 			if (b)
 				child_exit_status = _excutev(command, buffer, argv[0], continue_loop);
@@ -102,7 +106,15 @@ void prompt(int status)
 		if (isatty(STDIN_FILENO))
 		{
 			fflush(STDIN_FILENO);
-			write(STDOUT_FILENO, "ali@lostStars:~$ ", 17);
+			write(STDOUT_FILENO, ":) ", 3);
+		}
+	}
+	else if (status == 6)
+	{
+		if (isatty(STDIN_FILENO))
+		{
+			fflush(STDIN_FILENO);
+			write(STDOUT_FILENO, ":( ", 3);
 		}
 	}
 	else if (status == 2)
