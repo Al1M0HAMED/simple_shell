@@ -23,8 +23,22 @@ To compile and run the simple shell program, follow these steps:
 
 1. Clone this repository to your local machine.
 2. Navigate to the project directory.
-3. Compile the code using a C compiler (e.g., GCC): `gcc -o shell main.c`
-4. Run the compiled program: `./shell`
+3. Compile the code using a C compiler (e.g., GCC): `gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh`
+4. Run the compiled program: `./hsh`
+
+## testing
+
+$ echo "/bin/ls" | ./hsh
+hsh main.c shell.c test_ls_2
+$
+$ cat test_ls_2
+/bin/ls
+/bin/ls
+$
+$ cat test_ls_2 | ./hsh
+hsh main.c shell.c test_ls_2
+hsh main.c shell.c test_ls_2
+$
 
 ## Usage
 
