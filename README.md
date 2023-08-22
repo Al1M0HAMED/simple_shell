@@ -71,7 +71,7 @@ README.md AUTHORS
 -rw-r--r-- 1 ali ali 1648 Aug 22 19:53 README.md
 :) exit
 ````
-### List of functions and system calls we could use
+### List of functions and system calls i could use
 List of allowed functions and system calls
 
     access (man 2 access)
