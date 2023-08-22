@@ -7,8 +7,15 @@ This is a simple shell program written in C. The shell provides a basic command-
 - Supports basic command execution.
 - Handles built-in commands such as `exit`, `clear`, and `env`.
 - Searches for executable commands in the PATH.
+- Handeles EOF (end of file) Ctrl+D.
 - Handles SIGINT signal (Ctrl+C) gracefully.
 - Displays a prompt with the current working directory.
+
+## About the Project
+
+This project is a part of the curriculum at ALX Holberton School, as a final project for sprint one. It represents a significant milestone in our learning journey at ALX, showcasing the skills and knowledge we've gained so far.
+
+As a student at ALX Holberton School, I'm a member of cohort 16. While this project was a collaborative effort within our group, I took the initiative to lead the implementation of various features.
 
 ## Getting Started
 
@@ -30,8 +37,13 @@ Once the shell is running, you can enter commands just like in a regular shell. 
 External commands are executed by providing the full path or command name (searched in the PATH).
 
 ```shell
-$ ls
-file1.txt file2.txt
-$ pwd
+:) ls
+README.md AUTHORS
+:) pwd
 /home/user
-$ exit
+:) htbn_ds
+./hsh: 1: htbn_ds: not found
+:( ls -la
+-rw-r--r-- 1 ali ali   94 Aug 22 19:42 AUTHORS
+-rw-r--r-- 1 ali ali 1648 Aug 22 19:53 README.md
+:) exit
