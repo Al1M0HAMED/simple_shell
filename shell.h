@@ -1,9 +1,8 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef SHELL_H
+#define SHELL_H
 
 
-/*#  #*/
-#define BUFSIZE 1024
+/*# needed libraries #*/
 #include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -21,7 +20,7 @@
 #define BUFSIZE 1024
 extern char **environ;
 
-/**######  ######*/
+/*## functions prototype ##*/
 char *_getenv(char *);
 char *helper(char *command);
 void combine(char *file_path, char *command, char *path_token);
@@ -33,7 +32,7 @@ int _putchar(char c);
 int _atoi(char *s);
 int _strcmp(char *s1, char *s2);
 int _isalpha(int c);
-void array_rev(char *arr, int len);
+void array_rev(char *str, int len);
 char *_itoa(unsigned int n);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);

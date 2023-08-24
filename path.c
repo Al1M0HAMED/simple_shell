@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 /**
  * check_cmd - this fucntion checks if command exist in PATH.
  * @command: is the name of the program we need to know if it exist.
@@ -96,4 +96,19 @@ char *_getenv(char *name)
 	}
 	return (NULL);
 }
-
+/**
+* sigint_handler - this function handels ^C.
+* @_signal: .
+* ## 100053370433155 ##
+*/
+void sigint_handler(int _signal)
+{
+	if (_signal == SIGINT)
+	{
+		if (isatty(STDOUT_FILENO))
+		{
+			write(STDOUT_FILENO, "\n:) ", 4);
+			fflush(STDIN_FILENO);
+		}
+	}
+}
