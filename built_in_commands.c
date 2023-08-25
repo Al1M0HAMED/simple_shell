@@ -68,6 +68,7 @@ void _cd(char *command[], char *argv, int *n)
 		str = _strdup(_getenv("OLDPWD"));
 		setenv("PWD", str, 1);
 		chdir(str);
+		free(str);
 	}
 	else
 	{
