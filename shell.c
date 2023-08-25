@@ -46,7 +46,7 @@ int main(__attribute__((unused)) int argc, char *argv[])
 				if (command[c] == NULL)
 				break;
 			}
-			b = built(command[0], buffer, &child_exit_status, &continue_loop);
+			b = built(command, buffer, argv[0], &continue_loop);
 			child_exit_status = b;
 			command[c] = NULL;
 			if (b)
@@ -55,43 +55,6 @@ int main(__attribute__((unused)) int argc, char *argv[])
 	}
 	free(buffer);
 	return (child_exit_status);
-}
-/**
- * built - this function search for a built in command.
- * @command: is the command.
- * @buffer: is the buffer.
- * @e: is the error status.
- * @c: is the number of excuted times.
- * Return: 1 if faild 0 if success.
- */
-int built(char *command, char *buffer, int *e, int *c)
-{
-	int ee = *e, i = 0;
-
-	if (_strcmp(command, "exit") == 0)
-	{
-		free(buffer);
-		_exit(ee);
-	}
-	if (_strcmp(command, "clear") == 0)
-	{
-		write(STDOUT_FILENO, "\033[H\033[J", 6);
-		*c = *c + 1;
-		return (0);
-	}
-	if (_strcmp(command, "env") == 0)
-	{
-		i = 0;
-		while (environ[i] != NULL)
-		{
-			if (i)
-				write(STDOUT_FILENO, "\n", 1);
-			write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
-			i++;
-		}
-		return (0);
-	}
-	return (1);
 }
 /**
  * prompt - this function prompt the normal shell prombt :).

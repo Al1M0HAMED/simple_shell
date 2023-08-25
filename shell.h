@@ -21,10 +21,12 @@
 extern char **environ;
 
 /*## functions prototype ##*/
+void cd_error(int *n, char *command[], char *argv);
+void _cd(char *command[], char *argv, int *n);
 char *_getenv(char *);
 char *helper(char *command);
 void combine(char *file_path, char *command, char *path_token);
-int built(char *command, char *buffer, int *e, int *c);
+int built(char *command[], char *buffer, char *argv, int *c);
 void prompt(int status);
 char *_strncpy(char *dest, char *src, int n);
 int _strlen(char *s);
