@@ -1,5 +1,7 @@
 # Simple Shell Project
-## UNIX is basically a simple operating system, but you have to be a genius to understand the simplicity
+<p align="center">
+  <em>"UNIX is basically a simple operating system, but you have to be a genius to understand the simplicity"</em>
+</p>
 <p align="center">
   <img src="https://miro.medium.com/v2/resize:fit:1400/1*WqxZ99tyXrI3aIYW8lLoHA.png" alt="logo">
 </p>
