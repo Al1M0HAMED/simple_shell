@@ -1,7 +1,5 @@
 # Simple Shell Project
-
-This is a simple shell program written in C. The shell provides a basic command-line interface that can execute commands, handle built-in commands, and search for executables in the PATH.
-
+## UNIX is basically a simple operating system, but you have to be a genius to understand the simplicity
 <p align="center">
   <img src="https://miro.medium.com/v2/resize:fit:1400/1*WqxZ99tyXrI3aIYW8lLoHA.png" alt="logo">
 </p>
@@ -12,8 +10,9 @@ This repository is a [Holberton School](https://www.holbertonschool.com/) and [A
 
 ## Features
 
+- supports cd and upadate OLDPWD and PWD to gave correct `pwd` and `ls`.
 - Supports basic command execution.
-- Handles built-in commands such as `exit`, `clear`, and `env`.
+- Handles built-in commands such as `exit`, `clear`, and `env`, and `cd`.
 - Searches for executable commands in the PATH.
 - Handeles EOF (end of file) Ctrl+D.
 - Handles SIGINT signal (Ctrl+C) gracefully.
@@ -52,7 +51,7 @@ $
 ## Usage
 
 Once the shell is running, you can enter commands just like in a regular shell. Built-in commands are supported:
-
+- `cd`: navigate the system.
 - `exit`: Terminate the shell.
 - `clear`: Clear the screen.
 - `env`: Display environment variables.
@@ -62,13 +61,21 @@ External commands are executed by providing the full path or command name (searc
 ```shell
 :) ls
 README.md AUTHORS
+:) /bin/ls
+README.md AUTHORS
 :) pwd
 /home/user
-:) htbn_ds
-./hsh: 1: htbn_ds: not found
-:( ls -la
--rw-r--r-- 1 ali ali   94 Aug 22 19:42 AUTHORS
--rw-r--r-- 1 ali ali 1648 Aug 22 19:53 README.md
+:) cd /path/to/directory
+:) pwd
+/path/to/directory
+:) dsasda
+./hsh: 1: dsasda: not found
+:( cd ..
+:) ls -la
+total 3
+drwxr-xr-x 2 user user 4096 Aug 26 10:00 .
+drwxr-xr-x 4 user user 4096 Aug 26 09:58 ..
+-rw-r--r-- 1 user user  158 Aug 26 10:00 file.txt
 :) exit
 ````
 ### List of functions and system calls i could use
@@ -107,48 +114,46 @@ List of allowed functions and system calls
 
 Here's a detailed overview of the key functions in this project:
 
-### errout.c
+## Functions
 
-- `_errout`: Function to handle error output.
+### built_in_commands.c
 
-### excute.c
+- `built`: Handles built-in commands such as `exit`, `clear`, `env`, and `cd`.
+- `_cd`: Implements the built-in `cd` command to change the current working directory.
+- `cd_error`: Displays error messages for the `cd` command.
 
-- `_excutev`: Function to execute a command using the `execve` system call.
+### string_functions.c
 
-### main.h
+- `intlen`: Determines the length of an integer.
+- `_itoa`: Converts an integer to a string.
+- `_strcpy`: Copies a string.
+- `_strncmp`: Compares a specified number of characters in two strings.
 
-- Function prototypes and macros used across the project.
+### more_string_functions.c
 
-### more_strings.c
-
-- `_strcat`: implemantion of strcat(man 2).
-- `_strlen`: implemantion of strlen(man 2).
-- `_strdup`: implemantion of strdup(man 2).
-- `array_rev`: Reverses the order of an array.
-- `_strcmp`: implemantion of strcmp(man 2).
+- `_strcat`: Concatenates two strings.
+- `_strlen`: Calculates the length of a string.
+- `_strdup`: Duplicates a string.
+- `array_rev`: Reverses the order of elements in an array.
+- `_strcmp`: Compares two strings.
 
 ### path.c
 
 - `check_cmd`: Checks if a command exists in the PATH.
-- `combine`: Combines two strings.
-- `_getenv`: implemantion of getenv(man 3).
+- `combine`: Combines a command with its full path.
+- `helper`: Helper function to check command existence.
+- `_getenv`: Retrieves the value of an environment variable.
 
 ### shell.c
 
-- `main`: Main function to run the shell.
-- `built`: Handles built-in commands.
+- `main`: Main function that runs the shell.
 - `prompt`: Displays the shell prompt.
+- `_excutev`: Executes a command using `execve`.
+- `_errout`: Prints error messages for command execution.
 
-### sigint_handler.c
+### shell.h
 
-- `sigint_handler`: Handles the SIGINT (Ctrl+C) signal.
-
-### strings.c
-
-- `intlen`: Computes the length of an integer.
-- `_itoa`: Converts an integer to a string.
-- `_strcpy`: Copies a string.
-- `_strncmp`: implemantion of strcmp(man 2).
+- Header file containing function prototypes and macros.
 
 ## AUTHORS
 
