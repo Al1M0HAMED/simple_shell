@@ -49,40 +49,40 @@ int built(char *command[], char *buffer, char *argv, int *c)
  */
 void _cd(char *command[], char *argv, int *n)
 {
+	int i;
 	struct stat buffer;
-	char *str;
+	char str[PATH_MAX];
 
 	if (command[1] == NULL)
 	{
-		if (_getenv("HOME") != NULL)
-		{
-			setenv("PWD", _getenv("HOME"), 1);
-			chdir(_getenv("HOME"));
-		}
-		return;
+		if (_getenv("HOME") == NULL)
+			return;
+		setenv("PWD", _getenv("HOME"), 1);
+		chdir(_getenv("HOME"));
 	}
 	else if (strcmp(command[1], "-") == 0)
 	{
 		if (_getenv("OLDPWD") == NULL)
 			return;
-		str = _strdup(_getenv("OLDPWD"));
-		setenv("PWD", str, 1);
-		chdir(str);
-		free(str);
+		setenv("PWD", _getenv("OLDPWD"), 1);
+		chdir(_getenv("OLDPWD"));
 	}
 	else
 	{
-
-		str = _strdup(_getenv("PWD"));
-		_strcat(str, "/");
+		_strcpy(str, "/");
 		_strcat(str, command[1]);
 		if (stat(str, &buffer) == 0 && S_ISDIR(buffer.st_mode))
 		{
-			setenv("PWD", str, 1);
-			chdir(str);
+			setenv("OLDPWD", _getenv("PWD"), 1);
+			setenv("PWD", str, 0);
+			i = chdir(str);
+			if (i)
+				cd_error(n, command, argv);
 		}
 		else
+		{
 			cd_error(n, command, argv);
+		}
 	}
 }
 /**
@@ -93,14 +93,15 @@ void _cd(char *command[], char *argv, int *n)
  */
 void cd_error(int *i, char *command[], char *argv)
 {
-	int n = *i;
+	char *s = _itoa(*i);
 
 	write(STDERR_FILENO, argv, _strlen(argv));
 	write(STDERR_FILENO, ": ", 2);
-	write(STDERR_FILENO, _itoa(n), _strlen(_itoa(n)));
+	write(STDERR_FILENO, s, _strlen(s));
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, command[0], _strlen(command[0]));
 	write(STDERR_FILENO, ": can't cd to ", 14);
 	write(STDERR_FILENO, command[1], _strlen(command[1]));
 	write(STDERR_FILENO, "\n", 1);
+	free(s);
 }
