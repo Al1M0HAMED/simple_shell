@@ -161,6 +161,4 @@ Here's a detailed overview of the key functions in this project:
 
 * Ali Mohamed [Facebook](https://www.facebook.com/profile.php?id=100053370433155)
 
-# ## Project Statistics
-
-Total Lines of Code: ![647](https://img.shields.io/badge/Lines%20of%20Code-647-blue)
+![647](https://img.shields.io/badge/Lines%20of%20Code-647-blue)
