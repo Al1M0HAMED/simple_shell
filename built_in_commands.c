@@ -7,7 +7,7 @@
 * @c: is the number of excuted times.
 * Return: 1 if faild 0 if success.
 */
-int built(char *command[], char *buffer, char *argv, int *c)
+int built(char *command[],__attribute__((unused)) char *buffer, char *argv, int *c)
 {
 	int i = 0;
 
