@@ -11,11 +11,6 @@ int built(char *command[], char *buffer, char *argv, int *c)
 {
 	int i = 0;
 
-	if (_strcmp(command[0], "exit") == 0)
-	{
-		free(buffer);
-		_exit(0);
-	}
 	if (_strcmp(command[0], "clear") == 0)
 	{
 		write(STDOUT_FILENO, "\033[H\033[J", 6);

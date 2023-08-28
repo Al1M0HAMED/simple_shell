@@ -46,6 +46,8 @@ int main(__attribute__((unused)) int argc, char *argv[])
 				if (command[c] == NULL)
 				break;
 			}
+			if (strcmp(command[0], "exit") == 0)
+				free(buffer), exit(child_exit_status);
 			b = built(command, buffer, argv[0], &continue_loop);
 			child_exit_status = b;
 			command[c] = NULL;
