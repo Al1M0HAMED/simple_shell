@@ -51,38 +51,42 @@ void _cd(char *command[], char *argv, int *n)
 {
 	int i;
 	struct stat buffer;
-	char str[PATH_MAX];
+	char str[PATH_MAX], buf[PATH_MAX];
 
 	if (command[1] == NULL)
 	{
 		if (_getenv("HOME") == NULL)
 			return;
-		setenv("PWD", _getenv("HOME"), 1);
-		chdir(_getenv("HOME"));
+		setenv("PWD", _getenv("HOME"), 1), chdir(_getenv("HOME"));
 	}
 	else if (strcmp(command[1], "-") == 0)
 	{
-		if (_getenv("OLDPWD") == NULL)
+		if ((_getenv("OLDPWD")) == NULL)
+		{
+			printf("%s\n", _getenv("PWD"));
 			return;
-		setenv("PWD", _getenv("OLDPWD"), 1);
-		chdir(_getenv("OLDPWD"));
+		}
+		getcwd(buf, PATH_MAX), chdir(_getenv("OLDPWD"));
+		printf("%s\n", _getenv("OLDPWD"));
+		setenv("PWD", _getenv("OLDPWD"), 1), setenv("OLDPWD", buf, 1);
 	}
 	else
 	{
-		_strcpy(str, "/");
-		_strcat(str, command[1]);
+		if (command[1][0] != '/')
+			strcpy(str, _getenv("PWD")), _strcat(str, "/"), _strcat(str, command[1]);
+		else
+			_strcpy(str, "/"), _strcat(str, command[1]);
 		if (stat(str, &buffer) == 0 && S_ISDIR(buffer.st_mode))
 		{
-			setenv("OLDPWD", _getenv("PWD"), 1);
-			setenv("PWD", str, 0);
+			getcwd(buf, PATH_MAX);
 			i = chdir(str);
 			if (i)
 				cd_error(n, command, argv);
+			else
+				setenv("OLDPWD", buf, 1), setenv("PWD", str, 1);
 		}
 		else
-		{
 			cd_error(n, command, argv);
-		}
 	}
 }
 /**
